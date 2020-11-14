@@ -1,27 +1,104 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:layout_height="match_parent">
 
-    <com.smarteist.autoimageslider.SliderView
-        android:id="@+id/slider"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="236dp"
-        app:sliderAnimationDuration="600"
-        app:sliderAutoCycleDirection="back_and_forth"
-        app:sliderAutoCycleEnabled="true"
-        app:sliderIndicatorAnimationDuration="600"
-        app:sliderIndicatorGravity="center_horizontal|bottom"
-        app:sliderIndicatorMargin="15dp"
-        app:sliderIndicatorOrientation="horizontal"
-        app:sliderIndicatorPadding="3dp"
-        app:sliderIndicatorRadius="2dp"
-        app:sliderIndicatorSelectedColor="#5A5A5A"
-        app:sliderIndicatorUnselectedColor="#FFF"
-        app:sliderScrollTimeInSec="1"
-        app:sliderStartAutoCycle="true"></com.smarteist.autoimageslider.SliderView>
-</LinearLayout>
+        android:orientation="vertical"
+        android:layout_height="match_parent">
+        <com.smarteist.autoimageslider.SliderView
+            android:id="@+id/slider"
+            android:layout_width="match_parent"
+            android:layout_height="236dp"
+            app:sliderAnimationDuration="600"
+            app:sliderAutoCycleDirection="back_and_forth"
+            app:sliderAutoCycleEnabled="true"
+            app:sliderIndicatorAnimationDuration="600"
+            app:sliderIndicatorGravity="center_horizontal|bottom"
+            app:sliderIndicatorMargin="15dp"
+            app:sliderIndicatorOrientation="horizontal"
+            app:sliderIndicatorPadding="3dp"
+            app:sliderIndicatorRadius="2dp"
+            app:sliderIndicatorSelectedColor="#5A5A5A"
+            app:sliderIndicatorUnselectedColor="#FFF"
+            app:sliderScrollTimeInSec="1"
+            app:sliderStartAutoCycle="true"></com.smarteist.autoimageslider.SliderView>
+
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:background="#99000000"
+            android:layout_margin="9dp"
+            android:padding="2dp"
+            android:layout_height="wrap_content">
+            <TextView
+                android:id="@+id/name_phimmoi"
+                android:text="@string/Name_phimmoi"
+                android:layout_weight="1"
+                android:textSize="17dp"
+                android:textStyle="bold"
+                android:textColor="@color/colorText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+            <TextView
+                android:id="@+id/show_all"
+                android:text="Xem Tất Cả >>"
+                android:textSize="17dp"
+                android:textStyle="bold"
+                android:focusable="true"
+                android:textColor="@color/colorText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+        </LinearLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rycler_hd"
+            android:layout_margin="8dp"
+            android:layout_marginLeft="0dp"
+            android:padding="2dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:background="#99000000"
+            android:layout_margin="9dp"
+            android:padding="2dp"
+            android:layout_height="wrap_content">
+            <TextView
+                android:id="@+id/name_phimmoi"
+                android:text="@string/Name_phimmoi"
+                android:layout_weight="1"
+                android:textSize="17dp"
+                android:textStyle="bold"
+                android:textColor="@color/colorText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+            <TextView
+                android:id="@+id/show_all"
+                android:text="Xem Tất Cả >>"
+                android:textSize="17dp"
+                android:textStyle="bold"
+                android:focusable="true"
+                android:textColor="@color/colorText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+        </LinearLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rycler_kinhdi"
+            android:layout_margin="8dp"
+            android:layout_marginLeft="0dp"
+            android:padding="2dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+    </LinearLayout>
+
+</RelativeLayout>
