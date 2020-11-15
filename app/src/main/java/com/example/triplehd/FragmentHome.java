@@ -1,9 +1,12 @@
 package com.example.triplehd;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
@@ -12,7 +15,8 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -26,7 +30,7 @@ public class FragmentHome extends Fragment {
     SliderView slideImg;
     SlideshowAdapter adapterSlide;
     AdapterMovie adapterMovie;
-    TextView show_all;
+    TextView show_all_action, show_all_horror;
     RecyclerView recyclerView_hd, recyclerView_kinhdi;
     ArrayList<myPoster> dataSlide = new ArrayList<>();
     ArrayList<myPoster> datalist = new ArrayList<>();
@@ -38,11 +42,14 @@ public class FragmentHome extends Fragment {
         slideImg = layout_slideshow.findViewById(R.id.slider);
         recyclerView_hd = layout_slideshow.findViewById(R.id.rycler_hd);
         recyclerView_kinhdi = layout_slideshow.findViewById(R.id.rycler_kinhdi);
-        show_all = layout_slideshow.findViewById(R.id.show_all);
+        show_all_action = layout_slideshow.findViewById(R.id.show_all_action);
+        show_all_horror = layout_slideshow.findViewById(R.id.show_all_horror);
+        //Click show all
+        ShowAllCaterogy();
         //Add các phim vào slideshow
         initPoster_SlideShow();
         //Setting cho slideshow
-        adapterSlide = new SlideshowAdapter(this,dataSlide);
+        adapterSlide = new SlideshowAdapter(this, dataSlide);
         slideImg.setSliderAdapter(adapterSlide);
         slideImg.setIndicatorAnimation(IndicatorAnimationType.WORM);
         slideImg.setSliderTransformAnimation(SliderAnimations.SIMPLETRANSFORMATION);
@@ -70,6 +77,22 @@ public class FragmentHome extends Fragment {
 
         return layout_slideshow;
     }
+
+    private void ShowAllCaterogy() {
+        show_all_action.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //menuItem.setChecked(true);
+                FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                Fragment fragment = null;
+                fragment = new FragmentCategory();
+                fragmentTransaction.replace(R.id.fragmentMain,fragment);
+                fragmentTransaction.commit();
+            }
+        });
+    }
+
     // hàm khởi tạo poster ngang cho slideShow
     private void initPoster_SlideShow(){
         dataSlide.add(new myPoster(R.drawable.img_slideshow_01,"Ready Player One"));
@@ -84,4 +107,6 @@ public class FragmentHome extends Fragment {
         datalist.add(new myPoster(R.drawable.img_4,"Tên Phim 4"));
         datalist.add(new myPoster(R.drawable.img_5,"Tên Phim 5"));
     }
+
+
 }
