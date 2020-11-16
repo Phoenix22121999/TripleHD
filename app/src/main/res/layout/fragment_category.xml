@@ -11,24 +11,28 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
             <Button
+                android:id="@+id/hd"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Phim hành động"/>
             <Button
+                android:id="@+id/kd"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Phim kinh dị"/>
             <Button
+                android:id="@+id/vt"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Phim võ thuật"/>
             <Button
+                android:id="@+id/hh"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Phim hoạt hình"/>
         </LinearLayout>
     </HorizontalScrollView>
-    <GridView
+    <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:numColumns="3"
