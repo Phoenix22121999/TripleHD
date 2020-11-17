@@ -19,6 +19,9 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.triplehd.Adapter.AdapterMovie;
+import com.example.triplehd.ObjectClass.myPoster;
+
 import java.util.ArrayList;
 
 public class FragmentCategory extends Fragment {
