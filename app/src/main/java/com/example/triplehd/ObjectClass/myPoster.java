@@ -1,4 +1,4 @@
-package com.example.triplehd;
+package com.example.triplehd.ObjectClass;
 
 public class myPoster {
     int image;

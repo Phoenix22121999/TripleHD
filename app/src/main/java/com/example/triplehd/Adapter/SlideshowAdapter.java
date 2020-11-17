@@ -1,6 +1,5 @@
-package com.example.triplehd;
+package com.example.triplehd.Adapter;
 
-import android.content.Context;
 import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,6 +7,9 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.triplehd.FragmentHome;
+import com.example.triplehd.R;
+import com.example.triplehd.ObjectClass.myPoster;
 import com.smarteist.autoimageslider.SliderViewAdapter;
 
 import java.util.List;
