@@ -20,13 +20,14 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.triplehd.Adapter.AdapterMovie;
+import com.example.triplehd.ObjectClass.Phim;
 import com.example.triplehd.ObjectClass.myPoster;
 
 import java.util.ArrayList;
 
 public class FragmentCategory extends Fragment {
     RecyclerView recyclerView;
-    ArrayList<myPoster> data;
+    ArrayList<Phim> data;
     AdapterMovie adapter;
     Toolbar toolbar;
     Button ac,hor, kf ,catoo;
@@ -111,10 +112,10 @@ public class FragmentCategory extends Fragment {
     private void initPoster_SlideShow(){
         data = new ArrayList<>();
         for(int i =1 ; i < 20 ; i++){
-            data.add(new myPoster(R.drawable.img_1,"Ready Player One"));
-            data.add(new myPoster(R.drawable.img_2,"Avenger: Infinity War"));
-            data.add(new myPoster(R.drawable.img_3,"The Incredible"));
-            data.add(new myPoster(R.drawable.img_4,"Avatar"));
+//            data.add(new myPoster(R.drawable.img_1,"Ready Player One"));
+//            data.add(new myPoster(R.drawable.img_2,"Avenger: Infinity War"));
+//            data.add(new myPoster(R.drawable.img_3,"The Incredible"));
+//            data.add(new myPoster(R.drawable.img_4,"Avatar"));
         }
     }
 }
