@@ -2,6 +2,7 @@ package com.example.triplehd;
 
 import android.graphics.Color;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,11 +13,16 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.triplehd.Adapter.AdapterMovie;
 import com.example.triplehd.Adapter.SlideshowAdapter;
+import com.example.triplehd.AsyncTask.GetListPhimTask;
+import com.example.triplehd.LiveModel.MainViewModel;
+import com.example.triplehd.ObjectClass.Phim;
 import com.example.triplehd.ObjectClass.myPoster;
 import com.smarteist.autoimageslider.IndicatorView.animation.type.IndicatorAnimationType;
 import com.smarteist.autoimageslider.SliderAnimations;
@@ -30,9 +36,9 @@ public class FragmentHome extends Fragment {
     AdapterMovie adapterMovie;
     TextView show_all_action, show_all_horror;
     RecyclerView recyclerView_hd, recyclerView_kinhdi;
+    MainViewModel model;
     ArrayList<myPoster> dataSlide = new ArrayList<>();
-    ArrayList<myPoster> datalist = new ArrayList<>();
-
+    ArrayList<Phim> datalist = new ArrayList<>();
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -42,6 +48,13 @@ public class FragmentHome extends Fragment {
         recyclerView_kinhdi = layout_slideshow.findViewById(R.id.rycler_kinhdi);
         show_all_action = layout_slideshow.findViewById(R.id.show_all_action);
         show_all_horror = layout_slideshow.findViewById(R.id.show_all_horror);
+
+        model = new ViewModelProvider(requireActivity()).get(MainViewModel.class);
+        // Lấy phim
+        GetListPhimTask getListPhimTask =new GetListPhimTask(model);
+        getListPhimTask.execute("http://192.168.100.11/WEB/src/php/loadPage.php");
+
+
         //Click show all
         ShowAllCaterogy();
         //Add các phim vào slideshow
@@ -57,12 +70,23 @@ public class FragmentHome extends Fragment {
         slideImg.startAutoCycle();
 
         //Setting cho list phim theo loại
-        initPoster_List();
+//        initPoster_List();
         LinearLayoutManager layoutManager = new  LinearLayoutManager(getContext());
         layoutManager.setOrientation(RecyclerView.HORIZONTAL);
         adapterMovie = new AdapterMovie(getContext(),R.layout.layout_movie_home,datalist);
         recyclerView_hd.setAdapter(adapterMovie);
         recyclerView_hd.setLayoutManager(layoutManager);
+
+        //Observer data
+        model.getHanhDong().observe(getViewLifecycleOwner(), new Observer<ArrayList<Phim>>() {
+            @Override
+            public void onChanged(ArrayList<Phim> phims) {
+                Log.e("TAG", "onChanged: " + phims );
+                datalist.addAll( phims);
+                adapterMovie.notifyDataSetChanged();
+            }
+        });
+
         new Thread(new Runnable() {
             @Override
             public void run() {
@@ -98,13 +122,13 @@ public class FragmentHome extends Fragment {
         dataSlide.add(new myPoster(R.drawable.img_slideshow_03,"The Incredible"));
         dataSlide.add(new myPoster(R.drawable.img_slideshow_04,"Avatar"));
     }
-    private void initPoster_List(){
-        datalist.add(new myPoster(R.drawable.img_1,"Tên Phim 1"));
-        datalist.add(new myPoster(R.drawable.img_2,"Tên Phim 2"));
-        datalist.add(new myPoster(R.drawable.img_3,"Tên Phim 3"));
-        datalist.add(new myPoster(R.drawable.img_4,"Tên Phim 4"));
-        datalist.add(new myPoster(R.drawable.img_5,"Tên Phim 5"));
-    }
+//    private void initPoster_List(){
+//        datalist.add(new myPoster(R.drawable.img_1,"Tên Phim 1"));
+//        datalist.add(new myPoster(R.drawable.img_2,"Tên Phim 2"));
+//        datalist.add(new myPoster(R.drawable.img_3,"Tên Phim 3"));
+//        datalist.add(new myPoster(R.drawable.img_4,"Tên Phim 4"));
+//        datalist.add(new myPoster(R.drawable.img_5,"Tên Phim 5"));
+//    }
 
 
 }
