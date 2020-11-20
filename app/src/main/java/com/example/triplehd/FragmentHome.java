@@ -21,6 +21,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.triplehd.Adapter.AdapterMovie;
 import com.example.triplehd.Adapter.SlideshowAdapter;
 import com.example.triplehd.AsyncTask.GetListPhimTask;
+import com.example.triplehd.Contant.Contant;
 import com.example.triplehd.LiveModel.MainViewModel;
 import com.example.triplehd.ObjectClass.Phim;
 import com.example.triplehd.ObjectClass.myPoster;
@@ -52,7 +53,7 @@ public class FragmentHome extends Fragment {
         model = new ViewModelProvider(requireActivity()).get(MainViewModel.class);
         // Lấy phim
         GetListPhimTask getListPhimTask =new GetListPhimTask(model);
-        getListPhimTask.execute("http://192.168.100.11/WEB/src/php/loadPage.php");
+        getListPhimTask.execute(Contant.URL+"/php/loadPage.php");
 
 
         //Click show all
@@ -81,7 +82,6 @@ public class FragmentHome extends Fragment {
         model.getHanhDong().observe(getViewLifecycleOwner(), new Observer<ArrayList<Phim>>() {
             @Override
             public void onChanged(ArrayList<Phim> phims) {
-                Log.e("TAG", "onChanged: " + phims );
                 datalist.addAll( phims);
                 adapterMovie.notifyDataSetChanged();
             }
