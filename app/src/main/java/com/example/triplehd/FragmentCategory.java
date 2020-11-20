@@ -29,19 +29,17 @@ public class FragmentCategory extends Fragment {
     RecyclerView recyclerView;
     ArrayList<Phim> data;
     AdapterMovie adapter;
-    Toolbar toolbar;
-    Button ac,hor, kf ,catoo;
-    // ac : Hanh Dong
-    // hor: Kinh Di
-    // kf : Vo Thuat
-    // catoo : Hoat Hinh
+    Button action,horror, kungfu , legend;
+    // action : Hanh Dong
+    // horror: Kinh Di
+    // kungfu: Vo Thuat
+    // Legend : Than Thoai
 
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View layout =  inflater.inflate(R.layout.fragment_category,container,false);
-        toolbar = layout.findViewById(R.id.toolbar_category);
 
         recyclerView = layout.findViewById(R.id.grv_category);
         initPoster_SlideShow();
@@ -50,64 +48,43 @@ public class FragmentCategory extends Fragment {
         recyclerView.setLayoutManager(layoutManager);
         adapter = new AdapterMovie(getContext(),R.layout.layout_movie_home,data);
         recyclerView.setAdapter(adapter);
+        //Lấy id của button
+        action = layout.findViewById(R.id.btn_action);
+        horror = layout.findViewById(R.id.btn_horror);
+        kungfu = layout.findViewById(R.id.btn_kungfu);
+        legend = layout.findViewById(R.id.btn_legend);
+        //Sự kiện click button
+        clickButton();
         return layout;
     }
 
-    @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        setHasOptionsMenu(true);
-        super.onCreate(savedInstanceState);
-    }
-
-    @Override
-    public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
-        toolbar.inflateMenu(R.menu.menu_category);
-        toolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
+    private void clickButton() {
+        action.setOnClickListener(new View.OnClickListener() {
             @Override
-            public boolean onMenuItemClick(MenuItem item) {
-                item.setChecked(true);
-                int id = item.getItemId();
-                switch (id) {
-                    case R.id.ac:
-                        Toast.makeText(getActivity(),"Action",Toast.LENGTH_SHORT).show();
-                        break;
-                    case R.id.hor:
-                        Toast.makeText(getActivity(),"Horror",Toast.LENGTH_SHORT).show();
-                        break;
-                    case R.id.kf:
-                        Toast.makeText(getActivity(),"Kungfu",Toast.LENGTH_SHORT).show();
-                        break;
-                    case R.id.cartoo:
-                        Toast.makeText(getActivity(),"Cartoon",Toast.LENGTH_SHORT).show();
-                        break;
-                }
-                return false;
+            public void onClick(View view) {
+                Toast.makeText(getActivity(),"Action",Toast.LENGTH_SHORT).show();
             }
         });
-//        menu = toolbar.getMenu();
-//        inflater.inflate(R.menu.menu_category, menu);
-        super.onCreateOptionsMenu(menu, inflater);
+        horror.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(getActivity(),"Horror",Toast.LENGTH_SHORT).show();
+            }
+        });
+        kungfu.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(getActivity(),"KungFu",Toast.LENGTH_SHORT).show();
+            }
+        });
+        legend.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(getActivity(),"Legend",Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
-//    @Override
-//    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-//        int id = item.getItemId();
-//        switch (id) {
-//            case R.id.ac:
-//                Toast.makeText(getActivity(),"Action",Toast.LENGTH_SHORT).show();
-//                break;
-//            case R.id.hor:
-//                Toast.makeText(getActivity(),"Horror",Toast.LENGTH_SHORT).show();
-//                break;
-//            case R.id.kf:
-//                Toast.makeText(getActivity(),"Kungfu",Toast.LENGTH_SHORT).show();
-//                break;
-//            case R.id.cartoo:
-//                Toast.makeText(getActivity(),"Cartoon",Toast.LENGTH_SHORT).show();
-//                break;
-//        }
-//        return super.onOptionsItemSelected(item);
-//    }
 
     private void initPoster_SlideShow(){
         data = new ArrayList<>();
