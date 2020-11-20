@@ -35,20 +35,29 @@ public class FragmentHome extends Fragment {
     SliderView slideImg;
     SlideshowAdapter adapterSlide;
     AdapterMovie adapterMovie;
-    TextView show_all_action, show_all_horror;
-    RecyclerView recyclerView_hd, recyclerView_kinhdi;
+    TextView showMoreHanhDong,showMoreKinhDi,showMoreVoThuat,showMoreThanThoai;
+    RecyclerView rvHanhDong, rvKinhDi,rvVoThuat,rvThanThoai;
     MainViewModel model;
     ArrayList<myPoster> dataSlide = new ArrayList<>();
-    ArrayList<Phim> datalist = new ArrayList<>();
+    ArrayList<Phim> listPhimHanhDong = new ArrayList<>();
+    ArrayList<Phim> listPhimKinhDi = new ArrayList<>();
+    ArrayList<Phim> listPhimVoThuat = new ArrayList<>();
+    ArrayList<Phim> listPhimThanThoai = new ArrayList<>();
+    AdapterMovie adapterHanhDong, adapterKinhDi,adapterVoThuat,adapterThanThoai;
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View layout_slideshow = inflater.inflate(R.layout.fragment_home,container,false);
         slideImg = layout_slideshow.findViewById(R.id.slider);
-        recyclerView_hd = layout_slideshow.findViewById(R.id.rycler_hd);
-        recyclerView_kinhdi = layout_slideshow.findViewById(R.id.rycler_kinhdi);
-        show_all_action = layout_slideshow.findViewById(R.id.show_all_action);
-        show_all_horror = layout_slideshow.findViewById(R.id.show_all_horror);
+        rvHanhDong = layout_slideshow.findViewById(R.id.ryclerHanhDong);
+        rvKinhDi = layout_slideshow.findViewById(R.id.rycler);
+        rvThanThoai = layout_slideshow.findViewById(R.id.ryclerThanThoai);
+        rvVoThuat = layout_slideshow.findViewById(R.id.ryclerVoThuat);
+        showMoreHanhDong = layout_slideshow.findViewById(R.id.showMoreHanhDong);
+        showMoreKinhDi = layout_slideshow.findViewById(R.id.showMoreKinhDi);
+        showMoreThanThoai = layout_slideshow.findViewById(R.id.showMoreThanThoai);
+        showMoreVoThuat = layout_slideshow.findViewById(R.id.showMoreVoThuat);
 
         model = new ViewModelProvider(requireActivity()).get(MainViewModel.class);
         // Lấy phim
@@ -72,36 +81,73 @@ public class FragmentHome extends Fragment {
 
         //Setting cho list phim theo loại
 //        initPoster_List();
-        LinearLayoutManager layoutManager = new  LinearLayoutManager(getContext());
-        layoutManager.setOrientation(RecyclerView.HORIZONTAL);
-        adapterMovie = new AdapterMovie(getContext(),R.layout.layout_movie_home,datalist);
-        recyclerView_hd.setAdapter(adapterMovie);
-        recyclerView_hd.setLayoutManager(layoutManager);
+        LinearLayoutManager layoutManagerHanhDong = new  LinearLayoutManager(getContext());
+        layoutManagerHanhDong.setOrientation(RecyclerView.HORIZONTAL);
+        LinearLayoutManager layoutManagerKinhDi = new  LinearLayoutManager(getContext());
+        layoutManagerKinhDi.setOrientation(RecyclerView.HORIZONTAL);
+        LinearLayoutManager layoutManagerVoThuat = new  LinearLayoutManager(getContext());
+        layoutManagerVoThuat.setOrientation(RecyclerView.HORIZONTAL);
+        LinearLayoutManager layoutManagerThanThoai = new  LinearLayoutManager(getContext());
+        layoutManagerThanThoai.setOrientation(RecyclerView.HORIZONTAL);
+
+        rvHanhDong.setLayoutManager(layoutManagerHanhDong);
+        rvKinhDi.setLayoutManager(layoutManagerKinhDi);
+        rvVoThuat.setLayoutManager(layoutManagerVoThuat);
+        rvThanThoai.setLayoutManager(layoutManagerThanThoai);
+
+        adapterHanhDong = new AdapterMovie(getContext(),R.layout.layout_movie_home,listPhimHanhDong);
+        adapterKinhDi = new AdapterMovie(getContext(),R.layout.layout_movie_home,listPhimKinhDi);
+        adapterVoThuat = new AdapterMovie(getContext(),R.layout.layout_movie_home,listPhimVoThuat);
+        adapterThanThoai = new AdapterMovie(getContext(),R.layout.layout_movie_home,listPhimThanThoai);
+        rvHanhDong.setAdapter(adapterHanhDong);
+        rvKinhDi.setAdapter(adapterKinhDi);
+        rvVoThuat.setAdapter(adapterVoThuat);
+        rvThanThoai.setAdapter(adapterThanThoai);
+
+
 
         //Observer data
         model.getHanhDong().observe(getViewLifecycleOwner(), new Observer<ArrayList<Phim>>() {
             @Override
             public void onChanged(ArrayList<Phim> phims) {
-                datalist.addAll( phims);
-                adapterMovie.notifyDataSetChanged();
+                listPhimHanhDong.addAll( phims);
+                adapterHanhDong.notifyDataSetChanged();
             }
         });
 
-        new Thread(new Runnable() {
+        model.getKinhDi().observe(getViewLifecycleOwner(), new Observer<ArrayList<Phim>>() {
             @Override
-            public void run() {
-                LinearLayoutManager layoutManager = new  LinearLayoutManager(getContext());
-                layoutManager.setOrientation(RecyclerView.HORIZONTAL);
-                recyclerView_kinhdi.setAdapter(adapterMovie);
-                recyclerView_kinhdi.setLayoutManager(layoutManager);
+            public void onChanged(ArrayList<Phim> phims) {
+                listPhimKinhDi.addAll(phims);
+                adapterKinhDi.notifyDataSetChanged();
             }
-        }).start();
+        });
+
+        model.getVoThuat().observe(getViewLifecycleOwner(), new Observer<ArrayList<Phim>>() {
+            @Override
+            public void onChanged(ArrayList<Phim> phims) {
+                listPhimVoThuat.addAll( phims);
+                adapterVoThuat.notifyDataSetChanged();
+            }
+        });
+
+        model.getThanThoai().observe(getViewLifecycleOwner(), new Observer<ArrayList<Phim>>() {
+            @Override
+            public void onChanged(ArrayList<Phim> phims) {
+                listPhimThanThoai.addAll( phims);
+                adapterThanThoai.notifyDataSetChanged();
+            }
+        });
+        /////////
 
         return layout_slideshow;
     }
 
+
+
+
     private void ShowAllCaterogy() {
-        show_all_action.setOnClickListener(new View.OnClickListener() {
+        showMoreVoThuat.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 //menuItem.setChecked(true);
