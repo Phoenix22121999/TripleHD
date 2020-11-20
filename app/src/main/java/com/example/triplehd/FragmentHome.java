@@ -108,6 +108,11 @@ public class FragmentHome extends Fragment {
                 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
                 Fragment fragment = null;
                 fragment = new FragmentCategory();
+                //Gửi dữ liệu sang fragmentCategory
+                Bundle bundle = new Bundle();
+                bundle.putString("theloai","Hanh Dong");
+                fragment.setArguments(bundle);
+
                 fragmentTransaction.replace(R.id.fragmentMain,fragment);
                 fragmentTransaction.commit();
             }

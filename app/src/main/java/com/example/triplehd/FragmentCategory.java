@@ -40,7 +40,9 @@ public class FragmentCategory extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View layout =  inflater.inflate(R.layout.fragment_category,container,false);
-
+        //Lấy dữ liệu từ fragment_home
+        Bundle bundle = getArguments();
+        Toast.makeText(getActivity(),bundle.getString("theloai"),Toast.LENGTH_SHORT).show();
         recyclerView = layout.findViewById(R.id.grv_category);
         initPoster_SlideShow();
         GridLayoutManager layoutManager = new GridLayoutManager(getContext(),3);
