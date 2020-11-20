@@ -33,8 +33,6 @@ public class AdapterMovie extends RecyclerView.Adapter<AdapterMovie.ViewHolder> 
     public AdapterMovie(Context context, int resouce, List<Phim> object) {
         this.ctx = context;
         this.data_movive = object;
-        Log.e("TAG", "AdapterMovie: " + object);
-
     }
 
 
@@ -56,6 +54,7 @@ public class AdapterMovie extends RecyclerView.Adapter<AdapterMovie.ViewHolder> 
 //        holder.poster.setImageResource(poster.getImage());
         DownloadImageTask downloadImageTask = new DownloadImageTask(holder.poster);
         String url = Contant.URL + poster.getLink();
+        Log.e("TAG", "onBindViewHolder: "+ url );
         downloadImageTask.execute(url);
     }
 
