@@ -39,8 +39,8 @@
                 android:padding="2dp"
                 android:layout_height="wrap_content">
                 <TextView
-                    android:id="@+id/name_phimmoi1"
-                    android:text="@string/Name_phimmoi"
+                    android:id="@+id/titleHanhDong"
+                    android:text="Phim Hành Động"
                     android:layout_weight="1"
                     android:textSize="17dp"
                     android:textStyle="bold"
@@ -48,7 +48,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"/>
                 <TextView
-                    android:id="@+id/show_all_action"
+                    android:id="@+id/showMoreHanhDong"
                     android:text="Xem Tất Cả >>"
                     android:textSize="17dp"
                     android:textStyle="bold"
@@ -59,7 +59,7 @@
             </LinearLayout>
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rycler_hd"
+                android:id="@+id/ryclerHanhDong"
                 android:layout_margin="8dp"
                 android:layout_marginLeft="0dp"
                 android:padding="2dp"
@@ -74,8 +74,8 @@
                 android:padding="2dp"
                 android:layout_height="wrap_content">
                 <TextView
-                    android:id="@+id/name_phimmoi2"
-                    android:text="@string/Name_phimmoi"
+                    android:id="@+id/titleKinhDi"
+                    android:text="Phim Kinh Dị"
                     android:layout_weight="1"
                     android:textSize="17dp"
                     android:textStyle="bold"
@@ -83,7 +83,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"/>
                 <TextView
-                    android:id="@+id/show_all_horror"
+                    android:id="@+id/showMoreKinhDi"
                     android:text="Xem Tất Cả >>"
                     android:textSize="17dp"
                     android:textStyle="bold"
@@ -94,13 +94,80 @@
             </LinearLayout>
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rycler_kinhdi"
+                android:id="@+id/rycler"
                 android:layout_margin="8dp"
                 android:layout_marginLeft="0dp"
                 android:padding="2dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:background="#99000000"
+                android:layout_margin="9dp"
+                android:padding="2dp"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:id="@+id/titleVoThuat"
+                    android:text="Phim Võ Thuật"
+                    android:layout_weight="1"
+                    android:textSize="17dp"
+                    android:textStyle="bold"
+                    android:textColor="@color/colorText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+                <TextView
+                    android:id="@+id/showMoreVoThuat"
+                    android:text="Xem Tất Cả >>"
+                    android:textSize="17dp"
+                    android:textStyle="bold"
+                    android:focusable="true"
+                    android:textColor="@color/colorText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+            </LinearLayout>
 
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/ryclerVoThuat"
+                android:layout_margin="8dp"
+                android:layout_marginLeft="0dp"
+                android:padding="2dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:background="#99000000"
+                android:layout_margin="9dp"
+                android:padding="2dp"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:id="@+id/titleThanThoai"
+                    android:text="Phim Thần Thoại"
+                    android:layout_weight="1"
+                    android:textSize="17dp"
+                    android:textStyle="bold"
+                    android:textColor="@color/colorText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+                <TextView
+                    android:id="@+id/showMoreThanThoai"
+                    android:text="Xem Tất Cả >>"
+                    android:textSize="17dp"
+                    android:textStyle="bold"
+                    android:focusable="true"
+                    android:textColor="@color/colorText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+            </LinearLayout>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/ryclerThanThoai"
+                android:layout_margin="8dp"
+                android:layout_marginLeft="0dp"
+                android:padding="2dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
         </LinearLayout>
     </ScrollView>
 </RelativeLayout>
