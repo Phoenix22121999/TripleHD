@@ -1,6 +1,7 @@
 package com.example.triplehd.Adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.util.Log;
@@ -15,6 +16,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.triplehd.AsyncTask.DownloadImageTask;
 import com.example.triplehd.Contant.Contant;
+import com.example.triplehd.MovieActivity;
 import com.example.triplehd.ObjectClass.Phim;
 import com.example.triplehd.R;
 import com.example.triplehd.ObjectClass.myPoster;
@@ -46,7 +48,7 @@ public class AdapterMovie extends RecyclerView.Adapter<AdapterMovie.ViewHolder> 
     }
 
     @Override
-    public void onBindViewHolder(@NonNull AdapterMovie.ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull AdapterMovie.ViewHolder holder, final int position) {
         final Phim poster = data_movive.get(position);
         // name = name
         // poster = img
@@ -77,6 +79,9 @@ public class AdapterMovie extends RecyclerView.Adapter<AdapterMovie.ViewHolder> 
             @Override
             public void onClick(View view) {
                 Log.e("TAG", "onClick: "+ poster.getId() );
+                Intent intent = new Intent(ctx, MovieActivity.class);
+                intent.putExtra("MovieId",poster.getId());
+                ctx.startActivity(intent);
             }
         });
     }
