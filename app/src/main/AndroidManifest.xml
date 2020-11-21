@@ -20,6 +20,8 @@
         </activity>
         <activity android:name=".FragmentSearch">
         </activity>
+        <activity android:name=".MovieActivity">
+        </activity>
     </application>
 
 </manifest>

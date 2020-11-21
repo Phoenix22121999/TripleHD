@@ -5,6 +5,11 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="@drawable/background">
+    <androidx.appcompat.widget.Toolbar
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="#F4C2D7"
+        android:id="@+id/toolbar_movie"/>
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="235dp"
