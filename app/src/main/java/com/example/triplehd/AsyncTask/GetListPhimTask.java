@@ -61,23 +61,27 @@ public class GetListPhimTask extends AsyncTask<String,String,String>  {
         ArrayList<Phim> listKinhDi = new ArrayList<Phim>();
         ArrayList<Phim> listThanThoai = new ArrayList<Phim>();
         ArrayList<Phim> listVoThuat = new ArrayList<Phim>();
+        try {
+            listHanhDong.add(theLoai.getHanhDong().getMovie_1());
+            listHanhDong.add(theLoai.getHanhDong().getMovie_2());
+            listHanhDong.add(theLoai.getHanhDong().getMovie_3());
+            listHanhDong.add(theLoai.getHanhDong().getMovie_4());
+            listKinhDi.add(theLoai.getKinhDi().getMovie_1());
+            listKinhDi.add(theLoai.getKinhDi().getMovie_2());
+            listKinhDi.add(theLoai.getKinhDi().getMovie_3());
+            listKinhDi.add(theLoai.getKinhDi().getMovie_4());
+            listThanThoai.add(theLoai.getThanThoai().getMovie_1());
+            listThanThoai.add(theLoai.getThanThoai().getMovie_2());
+            listThanThoai.add(theLoai.getThanThoai().getMovie_3());
+            listThanThoai.add(theLoai.getThanThoai().getMovie_4());
+            listVoThuat.add(theLoai.getVoThuat().getMovie_1());
+            listVoThuat.add(theLoai.getVoThuat().getMovie_2());
+            listVoThuat.add(theLoai.getVoThuat().getMovie_3());
+            listVoThuat.add(theLoai.getVoThuat().getMovie_4());
+        }catch (Exception e){
+            Log.e("TAG", "onPostExecute: "+e );
+        }
 
-        listHanhDong.add(theLoai.getHanhDong().getMovie_1());
-        listHanhDong.add(theLoai.getHanhDong().getMovie_2());
-        listHanhDong.add(theLoai.getHanhDong().getMovie_3());
-        listHanhDong.add(theLoai.getHanhDong().getMovie_4());
-        listKinhDi.add(theLoai.getKinhDi().getMovie_1());
-        listKinhDi.add(theLoai.getKinhDi().getMovie_2());
-        listKinhDi.add(theLoai.getKinhDi().getMovie_3());
-        listKinhDi.add(theLoai.getKinhDi().getMovie_4());
-        listThanThoai.add(theLoai.getThanThoai().getMovie_1());
-        listThanThoai.add(theLoai.getThanThoai().getMovie_2());
-        listThanThoai.add(theLoai.getThanThoai().getMovie_3());
-        listThanThoai.add(theLoai.getThanThoai().getMovie_4());
-        listVoThuat.add(theLoai.getVoThuat().getMovie_1());
-        listVoThuat.add(theLoai.getVoThuat().getMovie_2());
-        listVoThuat.add(theLoai.getVoThuat().getMovie_3());
-        listVoThuat.add(theLoai.getVoThuat().getMovie_4());
 
         model.setHanhDong(listHanhDong);
         model.setkinhDi(listKinhDi);

@@ -149,20 +149,41 @@ public class FragmentHome extends Fragment {
         showMoreVoThuat.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //menuItem.setChecked(true);
-                FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
-                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                Fragment fragment = null;
-                fragment = new FragmentCategory();
-                //Gửi dữ liệu sang fragmentCategory
-                Bundle bundle = new Bundle();
-                bundle.putString("theloai","Hanh Dong");
-                fragment.setArguments(bundle);
-
-                fragmentTransaction.replace(R.id.fragmentMain,fragment);
-                fragmentTransaction.commit();
+                toCategory("3");
             }
         });
+        showMoreKinhDi.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                toCategory("2");
+            }
+        });
+        showMoreThanThoai.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                toCategory("4");
+            }
+        });
+        showMoreHanhDong.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                toCategory("1");
+            }
+        });
+    }
+
+    public void toCategory(String genre){
+        FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        Fragment fragment = null;
+        fragment = new FragmentCategory();
+        //Gửi dữ liệu sang fragmentCategory
+        Bundle bundle = new Bundle();
+        bundle.putString("genre",genre);
+        fragment.setArguments(bundle);
+
+        fragmentTransaction.replace(R.id.fragmentMain,fragment);
+        fragmentTransaction.commit();
     }
 
     // hàm khởi tạo poster ngang cho slideShow

@@ -53,8 +53,25 @@ public class AdapterMovie extends RecyclerView.Adapter<AdapterMovie.ViewHolder> 
         holder.name.setText(poster.getTitle());
 //        holder.poster.setImageResource(poster.getImage());
         DownloadImageTask downloadImageTask = new DownloadImageTask(holder.poster);
-        String url = Contant.URL + poster.getLink();
-        Log.e("TAG", "onBindViewHolder: "+ url );
+        String genre;
+        switch (poster.getGenre()) {
+            case 1:
+                genre = "HanhDong/";
+                break;
+            case 2:
+                genre = "KinhDi/";
+                break;
+            case 3:
+                genre = "VoThuat/";
+                break;
+            case 4:
+                genre = "ThanThoai/";
+                break;
+            default:
+                genre = "HanhDong/";
+                break;
+        }
+        String url = Contant.URL_IMAGE_LINK +genre+ poster.getLink();
         downloadImageTask.execute(url);
     }
 
