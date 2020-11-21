@@ -7,7 +7,7 @@
     <ImageView
         android:layout_margin="8dp"
         android:id="@+id/poster_movive_home"
-        android:src="@drawable/img_1"
+        android:src="@drawable/ic_baseline_cloud_download_24"
         android:layout_width="120dp"
         android:scaleType="fitXY"
         android:layout_height="180dp"/>

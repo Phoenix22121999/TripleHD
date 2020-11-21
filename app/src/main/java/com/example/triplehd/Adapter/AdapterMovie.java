@@ -47,7 +47,7 @@ public class AdapterMovie extends RecyclerView.Adapter<AdapterMovie.ViewHolder> 
 
     @Override
     public void onBindViewHolder(@NonNull AdapterMovie.ViewHolder holder, int position) {
-        Phim poster = data_movive.get(position);
+        final Phim poster = data_movive.get(position);
         // name = name
         // poster = img
         holder.name.setText(poster.getTitle());
@@ -73,6 +73,12 @@ public class AdapterMovie extends RecyclerView.Adapter<AdapterMovie.ViewHolder> 
         }
         String url = Contant.URL_IMAGE_LINK +genre+ poster.getLink();
         downloadImageTask.execute(url);
+        holder.poster.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Log.e("TAG", "onClick: "+ poster.getId() );
+            }
+        });
     }
 
     @Override
