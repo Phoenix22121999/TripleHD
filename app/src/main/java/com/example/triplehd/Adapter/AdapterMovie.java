@@ -55,32 +55,17 @@ public class AdapterMovie extends RecyclerView.Adapter<AdapterMovie.ViewHolder> 
         holder.name.setText(poster.getTitle());
 //        holder.poster.setImageResource(poster.getImage());
         DownloadImageTask downloadImageTask = new DownloadImageTask(holder.poster);
-        String genre;
-        switch (poster.getGenre()) {
-            case 1:
-                genre = "HanhDong/";
-                break;
-            case 2:
-                genre = "KinhDi/";
-                break;
-            case 3:
-                genre = "VoThuat/";
-                break;
-            case 4:
-                genre = "ThanThoai/";
-                break;
-            default:
-                genre = "HanhDong/";
-                break;
-        }
-        String url = Contant.URL_IMAGE_LINK +genre+ poster.getLink();
+
+        String url = Contant.URL_IMAGE_LINK + poster.getLink();
         downloadImageTask.execute(url);
+//        Log.e("TAG", "onBindViewHolder: " + poster.getId() );
         holder.poster.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Log.e("TAG", "onClick: "+ poster.getId() );
+//                Log.e("TAG", "onClick: "+ poster.getId() );
                 Intent intent = new Intent(ctx, MovieActivity.class);
-                intent.putExtra("MovieId",poster.getId());
+                intent.putExtra("Id",poster.getId());
+                intent.putExtra("Genre",poster.getGenre());
                 ctx.startActivity(intent);
             }
         });
