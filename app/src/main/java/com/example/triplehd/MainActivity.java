@@ -9,19 +9,26 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.FrameLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
 
 import com.example.triplehd.AsyncTask.GetListPhimTask;
 import com.example.triplehd.LiveModel.MainViewModel;
+import com.example.triplehd.LiveModel.RelateMovieViewModel;
+import com.example.triplehd.LiveModel.UserViewModel;
+import com.example.triplehd.ObjectClass.User;
 import com.google.android.material.navigation.NavigationView;
 
 public class MainActivity extends AppCompatActivity {
@@ -31,21 +38,26 @@ public class MainActivity extends AppCompatActivity {
     FrameLayout fragmentMain;
     View headerLayout;
     UserViewModel userViewModel;
+
     TextView textViewUsername, textViewEmail, test;
     Boolean isLogin;
     String username, email, role, id;
     private SharedPreferences pref;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
         // Lấy id của các đối tượng
+
         toolbar = findViewById(R.id.toolbar);
         drawerLayout = findViewById(R.id.drawerLayout);
         navigationView = findViewById(R.id.navigationView);
         fragmentMain = findViewById(R.id.fragmentMain);
+
         pref = getSharedPreferences("UserPref", MODE_PRIVATE);
         headerLayout = navigationView.getHeaderView(0);
         textViewUsername = headerLayout.findViewById(R.id.username);
@@ -58,11 +70,17 @@ public class MainActivity extends AppCompatActivity {
         textViewEmail.setText(email);
         textViewUsername.setText(username);
         // Setting cho menu của navigation
+
         actionToolBar();
         // CLick items trong menu của navigations
         actionNavigation();
         getSupportFragmentManager().beginTransaction().replace(R.id.fragmentMain, new FragmentHome()).commit();
         navigationView.setCheckedItem(R.id.nav_home);
+        userViewModel = new ViewModelProvider(this).get(UserViewModel.class);
+        userViewModel.getUser().observe(this, new Observer<User>() {
+            @Override
+            public void onChanged(User user) {
+
 
         userViewModel = new ViewModelProvider(this).get(UserViewModel.class);
         userViewModel.getUser().observe(this, new Observer<User>() {
@@ -71,6 +89,7 @@ public class MainActivity extends AppCompatActivity {
                 textViewEmail.setText(user.getEmail());
             }
         });
+
 
     }
 
@@ -106,6 +125,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void actionNavigation() {
+
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(MenuItem menuItem) {
@@ -138,6 +158,7 @@ public class MainActivity extends AppCompatActivity {
                 return true;
             }
         });
+
     }
 
     // Thêm button search bên phải giao diện
@@ -147,7 +168,9 @@ public class MainActivity extends AppCompatActivity {
         return super.onCreateOptionsMenu(menu);
     }
 
+
     // Select button search trên giao diện
+
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         int id = item.getItemId();

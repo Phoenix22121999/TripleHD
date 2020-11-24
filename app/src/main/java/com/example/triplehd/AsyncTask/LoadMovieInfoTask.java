@@ -2,14 +2,17 @@ package com.example.triplehd.AsyncTask;
 
 import android.os.AsyncTask;
 import android.util.Log;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.triplehd.Contant.Contant;
-import com.example.triplehd.LiveModel.RelateMovieViewModel;
-import com.example.triplehd.LiveModel.UserViewModel;
-import com.example.triplehd.ObjectClass.User;
+import com.example.triplehd.LiveModel.CategoryViewModel;
+import com.example.triplehd.ObjectClass.Phim;
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+
+import org.json.JSONObject;
+
+import java.util.ArrayList;
 
 import okhttp3.FormBody;
 import okhttp3.OkHttpClient;
@@ -17,28 +20,32 @@ import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
 
-public class LoginTask extends AsyncTask<String, Void, String> {
+public class LoadMovieInfoTask extends AsyncTask<String, String, String> {
     OkHttpClient client = new OkHttpClient();
-    UserViewModel model;
-    TextView textError;
+    CategoryViewModel model;
+    TextView description;
 
-    public LoginTask(UserViewModel model, TextView textError) {
+    public LoadMovieInfoTask(CategoryViewModel model) {
         this.model = model;
-        this.textError = textError;
     }
 
+    public LoadMovieInfoTask(TextView description) {
+        this.description = description;
+    }
 
+    protected void onPreExecute() {
+        super.onPreExecute();
+    }
 
+    @Override
     protected String doInBackground(String... params) {
-//        String ussername = params[0];
-//        String pass = params[1];
         try {
             RequestBody formBody = new FormBody.Builder()
-                    .add("email", params[0])
-                    .add("pwd", params[1])
+                    .add("genre", params[0])
+                    .add("id", params[1])
                     .build();
             Request.Builder builder = new Request.Builder();
-            builder.url(Contant.URL_LOGIN).post(formBody);
+            builder.url(Contant.URL_GET_MOVIE_DESCRIPTION).post(formBody);
             Request request = builder.build();
             Response response = client.newCall(request).execute();
             return response.body().string();
@@ -47,27 +54,17 @@ public class LoginTask extends AsyncTask<String, Void, String> {
             Log.e("TAG", "doInBackground: " + e);
 
         }
+
         return null;
     }
 
     @Override
     protected void onPostExecute(String s) {
         super.onPostExecute(s);
-        try {
-            Gson gson = new Gson();
-//        ArrayList<Phim> movies = gson.fromJson(s, new TypeToken<ArrayList<Phim>>() {
-//        }.getType());
-            User user = gson.fromJson(s, User.class);
-            model.setUser(user);
-//            Log.e("TAG", "onPostExecute: " + user);
-
+        Gson gson = new Gson();
+        Phim movies = gson.fromJson(s, Phim.class);
+//        Log.e("TAG", "onPostExecute: " + movies);
+        description.setText(movies.getDescription());
 //        model.setMovieList(movies);
-        }catch (Exception e){
-
-            Log.e("TAG", "onPostExecute: "+e);
-
-            textError.setText(s);
-        }
-
     }
 }

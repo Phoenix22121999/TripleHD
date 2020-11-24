@@ -1,19 +1,33 @@
 package com.example.triplehd;
 
 import android.content.Intent;
+
 import android.content.SharedPreferences;
+
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
+
+import com.example.triplehd.AsyncTask.LoginTask;
+import com.example.triplehd.LiveModel.MainViewModel;
+import com.example.triplehd.LiveModel.UserViewModel;
+import com.example.triplehd.ObjectClass.User;
 
 import static android.content.Context.MODE_PRIVATE;
 
 public class FragmentLogin extends Fragment {
+
     EditText editUsername, editPass;
     Button buttonConfirm;
     TextView textError;
@@ -30,10 +44,12 @@ public class FragmentLogin extends Fragment {
         buttonConfirm = layout.findViewById(R.id.btn_Login);
         textError = layout.findViewById(R.id.tvError);
         pref = getActivity().getSharedPreferences("UserPref", MODE_PRIVATE);
+
         model = new ViewModelProvider(requireActivity()).get(UserViewModel.class);
         model.getUser().observe(getViewLifecycleOwner(), new Observer<User>() {
             @Override
             public void onChanged(User user) {
+
                 // Log.e("TAG", "onChanged: "+user );
                 if (user.getIsLogin() == true) {
                     Intent intent = new Intent(getContext(), MainActivity.class);
@@ -47,6 +63,7 @@ public class FragmentLogin extends Fragment {
                     editor.apply();
                     getContext().startActivity(intent);
 
+
                 }
             }
         });
@@ -55,11 +72,13 @@ public class FragmentLogin extends Fragment {
             public void onClick(View view) {
                 String username = editUsername.getText().toString().trim();
                 String pass = editPass.getText().toString().trim();
+
                 if (username.isEmpty() || pass.isEmpty()) {
                     textError.setText("Vui Lòng Nhập Đầy Đủ Thông Tin");
                 }
                 LoginTask loginTask = new LoginTask(model, textError);
                 loginTask.execute(username, pass);
+
             }
         });
 

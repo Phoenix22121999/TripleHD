@@ -52,7 +52,7 @@ public class FragmentCategory extends Fragment {
         Bundle bundle = getArguments();
         Toast.makeText(getActivity(), bundle.getString("genre"), Toast.LENGTH_SHORT).show();
         model = new ViewModelProvider(requireActivity()).get(CategoryViewModel.class);
-        ;
+
 
         Log.e("TAG", "onCreateView: " + bundle.getString("genre"));
 

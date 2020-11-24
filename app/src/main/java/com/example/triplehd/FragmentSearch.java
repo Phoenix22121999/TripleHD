@@ -12,13 +12,14 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.SearchView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.SearchView;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
+
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.GridLayoutManager;
@@ -32,13 +33,16 @@ import com.example.triplehd.ObjectClass.Phim;
 
 import java.util.ArrayList;
 
+
 public class FragmentSearch extends AppCompatActivity {
     Toolbar toolbar;
     RecyclerView recyclerView;
     SearchView searchView;
+
     SearchViewModel model;
     AdapterMovie adapter;
     ArrayList<Phim> data = new ArrayList<Phim>();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,11 +58,13 @@ public class FragmentSearch extends AppCompatActivity {
                 SearchTask searchTask = new SearchTask(model);
                 searchTask.execute(s);
                 searchView.clearFocus();
+
                 return true;
             }
 
             @Override
             public boolean onQueryTextChange(String s) {
+
                 return true;
             }
 

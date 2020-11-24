@@ -5,12 +5,14 @@ public class Phim {
     private String link;
     private String title;
     private int genre;
+    private String description;
 
-    public Phim(int id, String link, String title, int genre) {
+    public Phim(int id, String link, String title, int genre, String description) {
         this.id = id;
         this.link = link;
         this.title = title;
         this.genre = genre;
+        this.description = description;
     }
 
     public int getId() {
@@ -48,7 +50,16 @@ public class Phim {
                 ", link='" + link + '\'' +
                 ", title='" + title + '\'' +
                 ", genre=" + genre +
+                ", description='" + description + '\'' +
                 '}';
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public void setGenre(int genre) {
