@@ -19,33 +19,72 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
+
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.triplehd.Adapter.AdapterMovie;
+import com.example.triplehd.AsyncTask.SearchTask;
+import com.example.triplehd.LiveModel.CategoryViewModel;
+import com.example.triplehd.LiveModel.SearchViewModel;
+import com.example.triplehd.ObjectClass.Phim;
+
+import java.util.ArrayList;
+
 
 public class FragmentSearch extends AppCompatActivity {
     Toolbar toolbar;
     RecyclerView recyclerView;
     SearchView searchView;
+
+    SearchViewModel model;
+    AdapterMovie adapter;
+    ArrayList<Phim> data = new ArrayList<Phim>();
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.fragment_search);
         toolbar = findViewById(R.id.toolbar_search);
         recyclerView = findViewById(R.id.grv_search);
-        searchView=findViewById(R.id.search);
+        searchView = findViewById(R.id.search);
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String s) {
-                Log.e("TAG", "onQueryTextSubmit: "+s );
+                Log.e("TAG", "onQueryTextSubmit: " + s);
+                SearchTask searchTask = new SearchTask(model);
+                searchTask.execute(s);
+                searchView.clearFocus();
+
                 return true;
             }
 
             @Override
             public boolean onQueryTextChange(String s) {
-                Log.e("TAG", "onQueryTextChange: "+s );
-                return false;
+
+                return true;
             }
 
         });
+
+        GridLayoutManager layoutManager = new GridLayoutManager(this, 3);
+        recyclerView.setLayoutManager(layoutManager);
+        adapter = new AdapterMovie(this, R.layout.layout_movie_home, data);
+        recyclerView.setAdapter(adapter);
+        model = new ViewModelProvider(this).get(SearchViewModel.class);
+        model.getMovieList().observe(this, new Observer<ArrayList<Phim>>() {
+            @Override
+            public void onChanged(ArrayList<Phim> phims) {
+                Log.e("TAG", "onChanged: " + phims);
+                data.clear();
+                data.addAll(phims);
+                adapter.notifyDataSetChanged();
+            }
+        });
+
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         toolbar.setNavigationIcon(R.drawable.ic_action_back);
@@ -57,6 +96,7 @@ public class FragmentSearch extends AppCompatActivity {
             }
         });
     }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater();
