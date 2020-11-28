@@ -150,6 +150,9 @@ public class MainActivity extends AppCompatActivity {
                     case R.id.nav_login:
                         fragment = new FragmentLogin();
                         break;
+                    case R.id.nav_signin:
+                        fragment = new FragmentSignin();
+                        break;
                 }
                 fragmentTransaction.replace(R.id.fragmentMain, fragment);
                 fragmentTransaction.commit();
