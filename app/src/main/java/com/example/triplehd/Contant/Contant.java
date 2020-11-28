@@ -9,4 +9,5 @@ public class Contant {
     public static final String URL_GET_MOVIE_RELATE = URL_BASE + "TripleHD/php/getRelateMovie.php";
     public static final String URL_MOVIE_LINK = URL_BASE + "TripleHD/movie/";
     public static final String URL_LOGIN= URL_BASE + "TripleHD/php/login.php";
+    public static final String URL_LOAD_ALL= URL_BASE + "TripleHD/php/getAllMovie.php";
 }
