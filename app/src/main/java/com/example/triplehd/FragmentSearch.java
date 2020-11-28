@@ -48,13 +48,16 @@ public class FragmentSearch extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.fragment_search);
+        //Binding data
         toolbar = findViewById(R.id.toolbar_search);
         recyclerView = findViewById(R.id.grv_search);
         searchView = findViewById(R.id.search);
+        // Lấy chuôi được tìm kiếm
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String s) {
                 Log.e("TAG", "onQueryTextSubmit: " + s);
+                //Thực hiện asynctask
                 SearchTask searchTask = new SearchTask(model);
                 searchTask.execute(s);
                 searchView.clearFocus();
@@ -69,11 +72,12 @@ public class FragmentSearch extends AppCompatActivity {
             }
 
         });
-
+        //Thiệt lập rycycler view
         GridLayoutManager layoutManager = new GridLayoutManager(this, 3);
         recyclerView.setLayoutManager(layoutManager);
         adapter = new AdapterMovie(this, R.layout.layout_movie_home, data);
         recyclerView.setAdapter(adapter);
+        // observe data trả về từ asynctask
         model = new ViewModelProvider(this).get(SearchViewModel.class);
         model.getMovieList().observe(this, new Observer<ArrayList<Phim>>() {
             @Override
@@ -84,7 +88,7 @@ public class FragmentSearch extends AppCompatActivity {
                 adapter.notifyDataSetChanged();
             }
         });
-
+        // tạo toolbar
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         toolbar.setNavigationIcon(R.drawable.ic_action_back);

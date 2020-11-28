@@ -57,16 +57,17 @@ public class MainActivity extends AppCompatActivity {
         drawerLayout = findViewById(R.id.drawerLayout);
         navigationView = findViewById(R.id.navigationView);
         fragmentMain = findViewById(R.id.fragmentMain);
-
-        pref = getSharedPreferences("UserPref", MODE_PRIVATE);
         headerLayout = navigationView.getHeaderView(0);
         textViewUsername = headerLayout.findViewById(R.id.username);
         textViewEmail = headerLayout.findViewById(R.id.email);
+        //Lấy thông tin từ Pref
+        pref = getSharedPreferences("UserPref", MODE_PRIVATE);
         username = pref.getString("username", "username");
         email = pref.getString("email", "email");
         role = pref.getString("role", "2");
         id = pref.getString("id", "");
         isLogin = pref.getBoolean("isLogin", false);
+        //Gắn thon tin vào header
         textViewEmail.setText(email);
         textViewUsername.setText(username);
         // Setting cho menu của navigation
@@ -82,15 +83,15 @@ public class MainActivity extends AppCompatActivity {
             public void onChanged(User user) {
 
 
-        userViewModel = new ViewModelProvider(this).get(UserViewModel.class);
-        userViewModel.getUser().observe(this, new Observer<User>() {
-            @Override
-            public void onChanged(User user) {
-                textViewEmail.setText(user.getEmail());
+                userViewModel = new ViewModelProvider(MainActivity.this).get(UserViewModel.class);
+                userViewModel.getUser().observe(MainActivity.this, new Observer<User>() {
+                    @Override
+                    public void onChanged(User user) {
+                        textViewEmail.setText(user.getEmail());
+                    }
+                });
             }
         });
-
-
     }
 
     private void actionToolBar() {
@@ -181,3 +182,5 @@ public class MainActivity extends AppCompatActivity {
         return true;
     }
 }
+
+

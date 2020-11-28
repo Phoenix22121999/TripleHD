@@ -35,6 +35,7 @@ public class SlideshowAdapter extends SliderViewAdapter<SlideshowAdapter.ViewHol
         viewHolder.img.setImageResource(p.getImage());
         viewHolder.name.setTextSize(16);
         viewHolder.name.setTextColor(Color.WHITE);
+
     }
 
     @Override

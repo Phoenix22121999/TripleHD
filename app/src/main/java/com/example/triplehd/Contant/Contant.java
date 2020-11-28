@@ -13,5 +13,7 @@ public class Contant {
     public static final String URL_LOGIN = URL_BASE + "TripleHD/php/login.php";
     public static final String URL_LOAD_ALL = URL_BASE + "TripleHD/php/getAllMovie.php";
     public static final String URL_SREACH = URL_BASE + "TripleHD/php/search.php";
+    public static final String URL_GET_COMMENT = URL_BASE + "TripleHD/php/getComment.php";
+    public static final String URL_SET_COMMENT = URL_BASE + "TripleHD/php/setComment.php";
 
 }

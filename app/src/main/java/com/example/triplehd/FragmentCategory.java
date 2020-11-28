@@ -38,34 +38,30 @@ public class FragmentCategory extends Fragment {
     AdapterMovie adapter;
     Button action, horror, kungfu, legend;
     CategoryViewModel model;
-    // action : Hanh Dong
-    // horror: Kinh Di
-    // kungfu: Vo Thuat
-    // Legend : Than Thoai
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View layout = inflater.inflate(R.layout.fragment_category, container, false);
         //Lấy dữ liệu từ fragment_home
-//        model = new ViewModelProvider(requireActivity()).get(CategoryViewModel.class);
         Bundle bundle = getArguments();
         Toast.makeText(getActivity(), bundle.getString("genre"), Toast.LENGTH_SHORT).show();
         model = new ViewModelProvider(requireActivity()).get(CategoryViewModel.class);
 
 
         Log.e("TAG", "onCreateView: " + bundle.getString("genre"));
-
+        // Thực hiện asynctask
         GetCategoryMovieTask getCategoryMovieTask = new GetCategoryMovieTask(model);
         getCategoryMovieTask.execute(bundle.getString("genre"));
 
+        // Tạo recycler view
 
         recyclerView = layout.findViewById(R.id.grv_category);
         GridLayoutManager layoutManager = new GridLayoutManager(getContext(), 3);
         recyclerView.setLayoutManager(layoutManager);
         adapter = new AdapterMovie(getContext(), R.layout.layout_movie_home, data);
         recyclerView.setAdapter(adapter);
-
+        // observe data từ asynctask
         model.getMovieList().observe(getViewLifecycleOwner(), new Observer<ArrayList<Phim>>() {
             @Override
             public void onChanged(ArrayList<Phim> phims) {
