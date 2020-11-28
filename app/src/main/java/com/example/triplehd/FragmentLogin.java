@@ -39,12 +39,14 @@ public class FragmentLogin extends Fragment {
     public View onCreateView(@NonNull final LayoutInflater inflater, @Nullable ViewGroup container,
             @Nullable Bundle savedInstanceState) {
         View layout = inflater.inflate(R.layout.fragment_login, container, false);
+        //binding data
         editUsername = layout.findViewById(R.id.edt_user);
         editPass = layout.findViewById(R.id.edt_password);
         buttonConfirm = layout.findViewById(R.id.btn_Login);
         textError = layout.findViewById(R.id.tvError);
         pref = getActivity().getSharedPreferences("UserPref", MODE_PRIVATE);
 
+        // observe data từ asynctask
         model = new ViewModelProvider(requireActivity()).get(UserViewModel.class);
         model.getUser().observe(getViewLifecycleOwner(), new Observer<User>() {
             @Override
@@ -67,6 +69,7 @@ public class FragmentLogin extends Fragment {
                 }
             }
         });
+        //khi bấm đăng nhập
         buttonConfirm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

@@ -48,6 +48,8 @@ public class FragmentHome extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View layout_slideshow = inflater.inflate(R.layout.fragment_home,container,false);
+
+        //binding data
         slideImg = layout_slideshow.findViewById(R.id.slider);
         rvHanhDong = layout_slideshow.findViewById(R.id.ryclerHanhDong);
         rvKinhDi = layout_slideshow.findViewById(R.id.rycler);
