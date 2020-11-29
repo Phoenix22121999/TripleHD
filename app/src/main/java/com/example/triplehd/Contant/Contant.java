@@ -15,5 +15,6 @@ public class Contant {
     public static final String URL_SREACH = URL_BASE + "TripleHD/php/search.php";
     public static final String URL_GET_COMMENT = URL_BASE + "TripleHD/php/getComment.php";
     public static final String URL_SET_COMMENT = URL_BASE + "TripleHD/php/setComment.php";
+    public static final String URL_SIGNIN = URL_BASE + "TripleHD/php/register.php";
 
 }

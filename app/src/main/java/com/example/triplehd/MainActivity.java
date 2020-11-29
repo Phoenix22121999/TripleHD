@@ -71,7 +71,16 @@ public class MainActivity extends AppCompatActivity {
         textViewEmail.setText(email);
         textViewUsername.setText(username);
         // Setting cho menu của navigation
-
+        Menu menuNav= navigationView.getMenu();
+        MenuItem logoutNav = menuNav.findItem(R.id.nav_logout);
+        MenuItem loginNav = menuNav.findItem(R.id.nav_login);
+        MenuItem signin = menuNav.findItem(R.id.nav_signin);
+        if(isLogin){
+            loginNav.setVisible(false);
+            signin.setVisible(false);
+        }else {
+            logoutNav.setVisible(false);
+        }
         actionToolBar();
         // CLick items trong menu của navigations
         actionNavigation();
@@ -132,6 +141,7 @@ public class MainActivity extends AppCompatActivity {
             public boolean onNavigationItemSelected(MenuItem menuItem) {
                 // Highlight item được lựa chọn
                 menuItem.setChecked(true);
+
                 // Thay đổi Layout khi click vào items
                 FragmentManager fragmentManager = getSupportFragmentManager();
                 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
@@ -153,12 +163,27 @@ public class MainActivity extends AppCompatActivity {
                     case R.id.nav_signin:
                         fragment = new FragmentSignin();
                         break;
-                }
-                fragmentTransaction.replace(R.id.fragmentMain, fragment);
-                fragmentTransaction.commit();
-                // Đóng Drawer khi chọn vào items
-                drawerLayout.closeDrawers();
+                    case R.id.nav_logout:
+                        SharedPreferences.Editor editor = pref.edit();
+                        Intent intent = new Intent(MainActivity.this, MainActivity.class);
 
+                        editor.putString("username", " ");
+                        editor.putString("email", "");
+                        editor.putString("role", "");
+                        editor.putString("id", "");
+                        editor.putBoolean("isLogin", false);
+                        editor.apply();
+                        startActivity(intent);
+                        break;
+                }
+                if(id==R.id.nav_logout){
+
+                }else {
+                    fragmentTransaction.replace(R.id.fragmentMain, fragment);
+                    fragmentTransaction.commit();
+                    // Đóng Drawer khi chọn vào items
+                    drawerLayout.closeDrawers();
+                }
                 return true;
             }
         });
