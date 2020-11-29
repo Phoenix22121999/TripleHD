@@ -52,7 +52,7 @@ public class FragmentLogin extends Fragment {
             @Override
             public void onChanged(User user) {
 
-                // Log.e("TAG", "onChanged: "+user );
+                 Log.e("TAG", "onChanged: "+user );
                 if (user.getIsLogin() == true) {
                     Intent intent = new Intent(getContext(), MainActivity.class);
                     SharedPreferences.Editor editor = pref.edit();

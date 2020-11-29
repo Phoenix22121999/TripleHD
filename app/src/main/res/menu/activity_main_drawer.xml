@@ -21,6 +21,10 @@
             android:icon="@drawable/ic_action_signin"
             android:title="Đăng ký" />
         <item
+            android:id="@+id/nav_logout"
+            android:icon="@drawable/ic_action_list_movie"
+            android:title="Đăng Xuất" />
+        <item
             android:id="@+id/nav_list_movie"
             android:icon="@drawable/ic_action_list_movie"
             android:title="Danh sách phim" />
